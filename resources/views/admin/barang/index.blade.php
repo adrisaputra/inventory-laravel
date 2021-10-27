@@ -45,12 +45,12 @@
 										<table class="table mb-0">
 											<thead>
 											<tr style="background-color: gray;color:white">
-												<th style="width: 5%">No</th>
-												<th style="width: 15%">Barcode</th>
-												<th style="width: 20%">Nama Barang</th>
+												<th style="width: 2%">No</th>
+												<th style="width: 5%">Barcode</th>
+												<th style="width: 25%">Nama Barang</th>
 												<th style="width: 10%">Satuan</th>
 												<th style="width: 10%">Stok Saat Ini</th>
-												<th style="width: 10%">Aksi</th>
+												<th style="width: 25%">Aksi</th>
 											</tr>
 											</thead>
 											<tbody>
@@ -67,11 +67,18 @@
 												@endphp
 											<tr>
 												<td>{{ ($barang ->currentpage()-1) * $barang ->perpage() + $loop->index + 1 }}</td>
-												<td>{{ $v->barcode }}</td>
+												<td><center>
+														<!-- <img src="data:image/png;base64,{{DNS1D::getBarcodePNG($v->barcode, 'C39')}}" alt="barcode" /> -->
+														<!-- {!! DNS1D::getBarcodeHTML($v->barcode, 'C39') !!} -->
+														<img src="data:image/png;base64,{{DNS1D::getBarcodePNG($v->barcode, 'C39',2,70,array(1,1,1), true) }}" alt="barcode"   />
+													</center>
+												</td>
 												<td>{{ $v->nama_barang }}</td>
+												
 												<td>{{ $v->satuan }}</td>
 												<td>{{ number_format((($v->stok + $jumlah_barang_masuk->total)-$jumlah_barang_keluar->total),0,",",".") }}</td>
 												<td>
+													<a href="data:image/png;base64,{{DNS1D::getBarcodePNG($v->barcode, 'C39',2,70,array(1,1,1), true) }}" class="btn btn-xs btn-primary" download="{{ $v->nama_barang }}">Download Barcode</a>
 													<a href="{{ url('/barang/edit/'.$v->id ) }}" class="btn btn-xs btn-warning">Edit</a>
 													<a href="{{ url('/barang/hapus/'.$v->id ) }}" class="btn btn-xs btn-danger" onclick="return confirm('Anda Yakin ?');">Hapus</a>
 												</td>
