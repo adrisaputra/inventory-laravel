@@ -47,6 +47,16 @@
 												@if ($errors->has('password_confirmation')) <label id="validation-email-error" class="error jquery-validation-error small form-text invalid-feedback" for="validation-email">{{ $errors->first('password_confirmation') }}</label>@endif
 											</div>
 										</div>
+										<div class="form-group row">
+											<label class="col-form-label col-sm-3 text-sm-right"> {{ __('Group') }}</label>
+											<div class="col-sm-9">
+												<select class="form-control" name="group">
+												<option value="">- Pilih -</option>
+												<option value="1" @if($user->group==1) selected @endif >Administrator</option>
+												<option value="2" @if($user->group==2) selected @endif >Operator</option>
+											</select>
+											</div>
+										</div>
 										<br><br>
 										<div class="form-group row">
 											<div class="col-sm-10 ml-sm-auto">

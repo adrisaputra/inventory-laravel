@@ -13,6 +13,7 @@ class Barang extends Model
         'barcode',
         'nama_barang',
         'satuan',
+        'satuan',
         'harga',
         'stok',
         'user_id'

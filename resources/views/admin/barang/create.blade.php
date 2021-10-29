@@ -27,9 +27,14 @@
 											</div>
 										</div>
 										<div class="form-group row">
-											<label class="col-form-label col-sm-3 text-sm-right"> Satuan <span class="required" style="color: #dd4b39;">*</span></label>
-											<div class="col-sm-9">
-												<input type="text" name="satuan" class="form-control @if ($errors->has('satuan')) is-invalid @endif " value="{{ old('satuan') }}">
+											<label class="col-form-label col-sm-2 text-sm-right"> {{ __('Satuan') }}</label>
+											<div class="col-sm-10">
+												<select class="form-control @if ($errors->has('satuan')) is-invalid @endif " name="satuan">
+													<option value="">- Pilih Satuan-</option>
+													@foreach ($satuan as $v)
+														<option value="{{ $v->nama_satuan }}"  @if(old('satuan')==$v->nama_satuan) selected @endif>{{ $v->nama_satuan }}</option>
+													@endforeach
+												</select>
 												@if ($errors->has('satuan')) <label id="validation-email-error" class="error jquery-validation-error small form-text invalid-feedback" for="validation-email">{{ $errors->first('satuan') }}</label>@endif
 											</div>
 										</div>

@@ -52,7 +52,7 @@ class UserController extends Controller
         $input['name'] = $request->name;
         $input['email'] = $request->email;
         $input['password'] = Hash::make($request->password);
-        $input['group'] = 1;
+        $input['group'] = $request->group;
         User::create($input);
 		
 		return redirect('/user')->with('status','Data Tersimpan');
@@ -92,10 +92,12 @@ class UserController extends Controller
 		if($request->password){
             $user->name = $request->name;
             $user->email = $request->email;
+            $user->group = $request->group;
             $user->password = Hash::make($request->password);
 		} else {
             $user->name = $request->name;
             $user->email = $request->email;
+            $user->group = $request->group;
         }
         $user->save();
         
@@ -189,6 +191,6 @@ class UserController extends Controller
         
         $user->save();
         
-        return redirect('/user/edit_profil/1')->with('status', 'Data Berhasil Diubah');
+        return redirect('/user/edit_profil/'.$user->id)->with('status', 'Data Berhasil Diubah');
     }
 }

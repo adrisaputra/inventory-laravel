@@ -31,10 +31,18 @@ class BarangKeluarController extends Controller
     {
         $title = "Barang Keluar";
         $barang_keluar = $request->get('search');
-        $barang_keluar = BarangKeluar::where(function ($query) use ($barang_keluar) {
-                                $query->where('barcode', 'LIKE', '%'.$barang_keluar.'%')
-                                    ->orWhere('nama_barang_keluar', 'LIKE', '%'.$barang_keluar.'%')
-                                    ->orWhere('satuan', 'LIKE', '%'.$barang_keluar.'%');
+        $barang_keluar = BarangKeluar::
+                            where(function ($query) use ($barang_keluar) {
+                                $query->where(function ($query) use ($barang_keluar) {
+                                    $query->where('waktu', 'LIKE', '%'.$barang_keluar.'%')
+                                        ->orWhere('jumlah', 'LIKE', '%'.$barang_keluar.'%')
+                                        ->orWhere('keterangan', 'LIKE', '%'.$barang_keluar.'%');
+                                })
+                                ->orwhereHas('barang', function ($query) use ($barang_keluar) {
+                                    $query->where('barcode', 'LIKE', '%'. $barang_keluar .'%')
+                                     ->orWhere('nama_barang', 'LIKE', '%'.$barang_keluar.'%')
+                                     ->orWhere('satuan', 'LIKE', '%'.$barang_keluar.'%');
+                                });
                             })
                             ->orderBy('id','DESC')->paginate(25)->onEachSide(1);
         return view('admin.barang_keluar.index',compact('title','barang_keluar'));
@@ -55,6 +63,7 @@ class BarangKeluarController extends Controller
     {
         $this->validate($request, [
             'tanggal' => 'required',
+            'waktu' => 'required',
             'barang_id' => 'required',
             'jumlah' => 'required'
         ]);
@@ -64,6 +73,7 @@ class BarangKeluarController extends Controller
         $thn = substr($request->tanggal,6,4);
         
         $input['tanggal'] = $thn.'-'.$bln.'-'.$tgl;
+        $input['waktu'] = $request->waktu;
         $input['barang_id'] = $request->barang_id;
         $input['jumlah'] = str_replace(".", "", $request->jumlah);
         $input['keterangan'] = $request->keterangan;
@@ -89,6 +99,7 @@ class BarangKeluarController extends Controller
     {
         $this->validate($request, [
             'tanggal' => 'required',
+            'waktu' => 'required',
             'barang_id' => 'required',
             'jumlah' => 'required'
         ]);
@@ -100,6 +111,17 @@ class BarangKeluarController extends Controller
         $thn = substr($request->tanggal,6,4);
         
         $barang_keluar->tanggal = $thn.'-'.$bln.'-'.$tgl;
+        $barang_keluar->jumlah = str_replace(".", "", $request->jumlah);
+        $barang_keluar->user_id = Auth::user()->id;
+        $barang_keluar->save();
+        
+        return redirect('/barang_keluar/')->with('status', 'Data Berhasil Diubah');
+    }
+
+    ## Edit Data
+    public function update2(Request $request, BarangKeluar $barang_keluar)
+    {
+        $barang_keluar->fill($request->all());
         $barang_keluar->jumlah = str_replace(".", "", $request->jumlah);
         $barang_keluar->user_id = Auth::user()->id;
         $barang_keluar->save();

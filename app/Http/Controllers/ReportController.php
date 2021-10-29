@@ -53,23 +53,27 @@ class ReportController extends Controller
             $sheet->getColumnDimension('D')->setWidth(30);
             $sheet->getColumnDimension('E')->setWidth(20);
             $sheet->getColumnDimension('F')->setWidth(20);
+            $sheet->getColumnDimension('G')->setWidth(20);
+            $sheet->getColumnDimension('H')->setWidth(30);
 
             if($tanggal_awal==$tanggal_akhir){
                 $sheet->setCellValue('A1', 'DATA BARANG MASUK '.date('d-m-Y', strtotime($tanggal_awal)) );
             } else {
                 $sheet->setCellValue('A1', 'DATA BARANG MASUK '.date('d-m-Y', strtotime($tanggal_awal)).' SAMPAI '.date('d-m-Y', strtotime($tanggal_akhir)) );
             }
-            $sheet->mergeCells('A1:F1');
+            $sheet->mergeCells('A1:H1');
             $sheet->getStyle('A1')->getFont()->setBold(true);
             $sheet->getStyle("A1")->getFont()->setSize(12);
-            $sheet->getStyle('A1:F1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $sheet->getStyle('A1:H1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
             
             $sheet->setCellValue('A3', 'NO');
             $sheet->setCellValue('B3', 'TANGGAL MASUK');
-            $sheet->setCellValue('C3', 'BARCODE');
-            $sheet->setCellValue('D3', 'NAMA BARANG');
-            $sheet->setCellValue('E3', 'SATUAN');
-            $sheet->setCellValue('F3', 'JUMLAH');
+            $sheet->setCellValue('C3', 'WAKTU MASUK');
+            $sheet->setCellValue('D3', 'BARCODE');
+            $sheet->setCellValue('E3', 'NAMA BARANG');
+            $sheet->setCellValue('F3', 'SATUAN');
+            $sheet->setCellValue('G3', 'JUMLAH');
+            $sheet->setCellValue('H3', 'KETERANGAN');
             
             $rows = 4;
             $no = 1;
@@ -79,16 +83,18 @@ class ReportController extends Controller
             foreach($barang_masuk as $v){
                 $sheet->setCellValue('A' . $rows, $no++);
                 $sheet->setCellValue('B' . $rows, date('d-m-Y', strtotime($v->tanggal)));
-                $sheet->setCellValue('C' . $rows, $v->barang->barcode);
-                $sheet->setCellValue('D' . $rows, $v->barang->nama_barang);
-                $sheet->setCellValue('E' . $rows, $v->barang->satuan);
-                $sheet->setCellValue('F' . $rows, $v->jumlah);
-                $sheet->getStyle('F' . $rows)->getNumberFormat()->setFormatCode('#,##0');
+                $sheet->setCellValue('C' . $rows, $v->waktu);
+                $sheet->setCellValue('D' . $rows, $v->barang->barcode);
+                $sheet->setCellValue('E' . $rows, $v->barang->nama_barang);
+                $sheet->setCellValue('F' . $rows, $v->barang->satuan);
+                $sheet->setCellValue('G' . $rows, $v->jumlah);
+                $sheet->getStyle('G' . $rows)->getNumberFormat()->setFormatCode('#,##0');
+                $sheet->setCellValue('H' . $rows, $v->keterangan);
                 $rows++;
             }
             
-            $sheet->getStyle('A3:F'.($rows-1))->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-            $sheet->getStyle('A3:F'.($rows-1))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $sheet->getStyle('A3:H'.($rows-1))->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+            $sheet->getStyle('A3:H'.($rows-1))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
            
             $sheet->setTitle('Barang Masuk');
     
@@ -125,23 +131,27 @@ class ReportController extends Controller
             $sheet->getColumnDimension('D')->setWidth(30);
             $sheet->getColumnDimension('E')->setWidth(20);
             $sheet->getColumnDimension('F')->setWidth(20);
+            $sheet->getColumnDimension('G')->setWidth(20);
+            $sheet->getColumnDimension('H')->setWidth(30);
 
             if($tanggal_awal==$tanggal_akhir){
                 $sheet->setCellValue('A1', 'DATA BARANG KELUAR '.date('d-m-Y', strtotime($tanggal_awal)) );
             } else {
                 $sheet->setCellValue('A1', 'DATA BARANG KELUAR '.date('d-m-Y', strtotime($tanggal_awal)).' SAMPAI '.date('d-m-Y', strtotime($tanggal_akhir)) );
             }
-            $sheet->mergeCells('A1:F1');
+            $sheet->mergeCells('A1:H1');
             $sheet->getStyle('A1')->getFont()->setBold(true);
             $sheet->getStyle("A1")->getFont()->setSize(12);
-            $sheet->getStyle('A1:F1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $sheet->getStyle('A1:H1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
             
             $sheet->setCellValue('A3', 'NO');
             $sheet->setCellValue('B3', 'TANGGAL KELUAR');
-            $sheet->setCellValue('C3', 'BARCODE');
-            $sheet->setCellValue('D3', 'NAMA BARANG');
-            $sheet->setCellValue('E3', 'SATUAN');
-            $sheet->setCellValue('F3', 'JUMLAH');
+            $sheet->setCellValue('C3', 'WAKTU MASUK');
+            $sheet->setCellValue('D3', 'BARCODE');
+            $sheet->setCellValue('E3', 'NAMA BARANG');
+            $sheet->setCellValue('F3', 'SATUAN');
+            $sheet->setCellValue('G3', 'JUMLAH');
+            $sheet->setCellValue('H3', 'KETERANGAN');
             
             $rows = 4;
             $no = 1;
@@ -151,16 +161,18 @@ class ReportController extends Controller
             foreach($barang_keluar as $v){
                 $sheet->setCellValue('A' . $rows, $no++);
                 $sheet->setCellValue('B' . $rows, date('d-m-Y', strtotime($v->tanggal)));
-                $sheet->setCellValue('C' . $rows, $v->barang->barcode);
-                $sheet->setCellValue('D' . $rows, $v->barang->nama_barang);
-                $sheet->setCellValue('E' . $rows, $v->barang->satuan);
-                $sheet->setCellValue('F' . $rows, $v->jumlah);
-                $sheet->getStyle('F' . $rows)->getNumberFormat()->setFormatCode('#,##0');
+                $sheet->setCellValue('C' . $rows, $v->waktu);
+                $sheet->setCellValue('D' . $rows, $v->barang->barcode);
+                $sheet->setCellValue('E' . $rows, $v->barang->nama_barang);
+                $sheet->setCellValue('F' . $rows, $v->barang->satuan);
+                $sheet->setCellValue('G' . $rows, $v->jumlah);
+                $sheet->getStyle('G' . $rows)->getNumberFormat()->setFormatCode('#,##0');
+                $sheet->setCellValue('H' . $rows, $v->keterangan);
                 $rows++;
             }
             
-            $sheet->getStyle('A3:F'.($rows-1))->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-            $sheet->getStyle('A3:F'.($rows-1))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $sheet->getStyle('A3:H'.($rows-1))->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+            $sheet->getStyle('A3:H'.($rows-1))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
            
             $sheet->setTitle('Barang Keluar');
     

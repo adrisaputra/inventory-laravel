@@ -107,14 +107,21 @@
 						  <i class="align-middle" data-feather="printer"></i> <span>Report</span>
 						</a>
 					</li>
-					<li class="sidebar-header">
-						Setting
-					</li>
-					<li class="sidebar-item {{ (request()->is('user*')) ? 'active' : '' }}">
-						<a href="{{ url('/user') }}" class="sidebar-link">
-						<i class="align-middle" data-feather="users"></i> <span>User</span>
-						</a>
-					</li>
+					@if(Auth::user()->group==1)
+						<li class="sidebar-header">
+							Setting
+						</li>
+						<li class="sidebar-item {{ (request()->is('satuan*')) ? 'active' : '' }}">
+							<a href="{{ url('/satuan') }}" class="sidebar-link">
+							<i class="align-middle" data-feather="list"></i> <span>Satuan</span>
+							</a>
+						</li>
+						<li class="sidebar-item {{ (request()->is('user*')) ? 'active' : '' }}">
+							<a href="{{ url('/user') }}" class="sidebar-link">
+							<i class="align-middle" data-feather="users"></i> <span>User</span>
+							</a>
+						</li>
+					@endif
 
 				<div class="sidebar-bottom d-none d-lg-block">
 					<div class="media">

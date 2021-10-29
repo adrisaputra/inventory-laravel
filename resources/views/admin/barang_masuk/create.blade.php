@@ -21,6 +21,15 @@
 											</div>
 										</div>
 										<div class="form-group row">
+											<label class="col-form-label col-sm-3 text-sm-right"> {{ __('Waktu Masuk') }} <span class="required" style="color: #dd4b39;">*</span></label>
+											<div class="col-sm-9">
+												<div class="input-group date" id="datetimepicker-time" data-target-input="nearest">
+													<input type="text" name="waktu" class="form-control datetimepicker-input" data-target="#datetimepicker-time" data-toggle="datetimepicker"  value="{{ old('waktu') }}">
+												</div>
+												@if ($errors->has('waktu')) <label id="validation-email-error" class="error jquery-validation-error small form-text invalid-feedback" for="validation-email">{{ $errors->first('waktu') }}</label>@endif
+											</div>
+										</div>
+										<div class="form-group row">
 											<label class="col-form-label col-sm-3 text-sm-right"> {{ __('Barang') }}  <span class="required" style="color: #dd4b39;">*</span></label>
 											<div class="col-sm-9">
 												<select class="form-control select2 @if ($errors->has('barang_id')) is-invalid @endif" name="barang_id">

@@ -58,13 +58,13 @@
 														@if ($v->group==1)
 															<span class="label label-danger">Administrator</span>
 														@elseif  ($v->group==2)
-															<span class="label label-warning">Pegawai</span>
+															<span class="label label-warning">Operator</span>
 														@endif
 													</td>
 													<td>
-														<a href="{{ url('/user/edit/'.$v->id ) }}" class="btn btn-xs btn-flat btn-warning">Edit</a>
+														<a href="{{ url('/user/edit/'.$v->id ) }}" class="btn btn-sm btn-flat btn-warning btn-block">Edit</a>
 														@if ($v->id!=1)
-															<a href="{{ url('/user/hapus/'.$v->id ) }}" class="btn btn-xs btn-flat btn-danger" onclick="return confirm('Anda Yakin ?');">Hapus</a>
+															<a href="{{ url('/user/hapus/'.$v->id ) }}" class="btn btn-sm btn-flat btn-danger btn-block" onclick="return confirm('Anda Yakin ?');">Hapus</a>
 														@endif
 													</td>
 												</tr>

@@ -14,6 +14,7 @@ class BarangKeluar extends Model
         'jumlah',
         'keterangan',
         'tanggal',
+        'waktu',
         'stok',
         'user_id'
     ];

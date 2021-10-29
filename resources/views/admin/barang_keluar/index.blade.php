@@ -47,11 +47,13 @@
 											<tr style="background-color: gray;color:white">
 												<th style="width: 5%">No</th>
 												<th style="width: 10%">Tanggal</th>
+												<th style="width: 10%">Waktu</th>
 												<th style="width: 10%">Barcode</th>
 												<th style="width: 20%">Nama Barang</th>
 												<th style="width: 10%">Satuan</th>
 												<th style="width: 10%">Jumlah</th>
-												<th style="width: 10%">Aksi</th>
+												<th style="width: 10%">Keterangan</th>
+												<th style="width: 15%">Aksi</th>
 											</tr>
 											</thead>
 											<tbody>
@@ -59,13 +61,20 @@
 											<tr>
 												<td>{{ ($barang_keluar ->currentpage()-1) * $barang_keluar ->perpage() + $loop->index + 1 }}</td>
 												<td>{{ date('d-m-Y', strtotime($v->tanggal)) }}</td>
+												<td>{{ $v->waktu }}</td>
 												<td>{{ $v->barang->barcode }}</td>
 												<td>{{ $v->barang->nama_barang }}</td>
 												<td>{{ $v->barang->satuan }}</td>
 												<td>{{ number_format($v->jumlah,0,",",".") }}</td>
+												<td>{{ $v->keterangan }}</td>
 												<td>
-													<a href="{{ url('/barang_keluar/edit/'.$v->id ) }}" class="btn btn-xs btn-warning">Edit</a>
-													<a href="{{ url('/barang_keluar/hapus/'.$v->id ) }}" class="btn btn-xs btn-danger" onclick="return confirm('Anda Yakin ?');">Hapus</a>
+													<form action="{{ url('/'.Request::segment(1).'/edit2/'.$v->id) }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+														{{ csrf_field() }}
+														<input type="hidden" name="_method" value="PUT">
+														<input type="text" name="jumlah" placeholder="Jumlah Barang" class="form-control" onkeyup="formatRupiah(this, '.')" style="margin-bottom:10px">
+													</form>
+													<a href="{{ url('/barang_keluar/edit/'.$v->id ) }}" class="btn btn-sm btn-warning btn-block">Edit</a>
+													<a href="{{ url('/barang_keluar/hapus/'.$v->id ) }}" class="btn btn-sm btn-danger btn-block" onclick="return confirm('Anda Yakin ?');">Hapus</a>
 												</td>
 											</tr>
 

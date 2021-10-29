@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\BarangKeluarController;
+use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 
@@ -54,6 +55,7 @@ Route::get('/barang_masuk/create', [BarangMasukController::class, 'create']);
 Route::post('/barang_masuk', [BarangMasukController::class, 'store']);
 Route::get('/barang_masuk/edit/{barang_masuk}', [BarangMasukController::class, 'edit']);
 Route::put('/barang_masuk/edit/{barang_masuk}', [BarangMasukController::class, 'update']);
+Route::put('/barang_masuk/edit2/{barang_masuk}', [BarangMasukController::class, 'update2']);
 Route::get('/barang_masuk/hapus/{barang_masuk}',[BarangMasukController::class, 'delete']);
 
 ## Barang Keluar
@@ -63,7 +65,17 @@ Route::get('/barang_keluar/create', [BarangKeluarController::class, 'create']);
 Route::post('/barang_keluar', [BarangKeluarController::class, 'store']);
 Route::get('/barang_keluar/edit/{barang_keluar}', [BarangKeluarController::class, 'edit']);
 Route::put('/barang_keluar/edit/{barang_keluar}', [BarangKeluarController::class, 'update']);
+Route::put('/barang_keluar/edit2/{barang_keluar}', [BarangKeluarController::class, 'update2']);
 Route::get('/barang_keluar/hapus/{barang_keluar}',[BarangKeluarController::class, 'delete']);
+
+## Satuan
+Route::get('/satuan', [SatuanController::class, 'index']);
+Route::get('/satuan/search', [SatuanController::class, 'search']);
+Route::get('/satuan/create', [SatuanController::class, 'create']);
+Route::post('/satuan', [SatuanController::class, 'store']);
+Route::get('/satuan/edit/{satuan}', [SatuanController::class, 'edit']);
+Route::put('/satuan/edit/{satuan}', [SatuanController::class, 'update']);
+Route::get('/satuan/hapus/{satuan}',[SatuanController::class, 'delete']);
 
 ## Barang Keluar
 Route::get('/report', [ReportController::class, 'index']);

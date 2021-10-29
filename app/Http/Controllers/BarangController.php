@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;   //nama model
+use App\Models\Satuan;   //nama model
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB; //untuk membuat query di controller
@@ -43,7 +44,8 @@ class BarangController extends Controller
     public function create()
     {
         $title = "Barang";
-        $view=view('admin.barang.create',compact('title'));
+        $satuan = Satuan::get();
+        $view=view('admin.barang.create',compact('title','satuan'));
         $view=$view->render();
         return $view;
     }
@@ -74,7 +76,8 @@ class BarangController extends Controller
     public function edit(Barang $barang)
     {
         $title = "Barang";
-        $view=view('admin.barang.edit', compact('title','barang'));
+        $satuan = Satuan::get();
+        $view=view('admin.barang.edit', compact('title','barang','satuan'));
         $view=$view->render();
         return $view;
     }
