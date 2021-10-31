@@ -22,7 +22,7 @@ class BarangMasukController extends Controller
     public function index()
     {
         $title = "Barang Masuk";
-        $barang_masuk = BarangMasuk::orderBy('id','DESC')->paginate(25)->onEachSide(1);
+        $barang_masuk = BarangMasuk::orderBy('id','ASC')->paginate(25)->onEachSide(1);
         return view('admin.barang_masuk.index',compact('title','barang_masuk'));
     }
 
@@ -43,7 +43,7 @@ class BarangMasukController extends Controller
                                      ->orWhere('satuan', 'LIKE', '%'.$barang_masuk.'%');
                                 });
                             })
-                            ->orderBy('id','DESC')->paginate(25)->onEachSide(1);
+                            ->orderBy('id','ASC')->paginate(25)->onEachSide(1);
         return view('admin.barang_masuk.index',compact('title','barang_masuk'));
     }
 
@@ -51,7 +51,7 @@ class BarangMasukController extends Controller
     public function create()
     {
         $title = "Barang Masuk";
-        $barang = Barang::orderBy('id','DESC')->get();
+        $barang = Barang::orderBy('id','ASC')->get();
         $view=view('admin.barang_masuk.create',compact('title','barang'));
         $view=$view->render();
         return $view;
@@ -87,7 +87,7 @@ class BarangMasukController extends Controller
     public function edit(BarangMasuk $barang_masuk)
     {
         $title = "Barang Masuk";
-        $barang = Barang::orderBy('id','DESC')->get();
+        $barang = Barang::orderBy('id','ASC')->get();
         $view=view('admin.barang_masuk.edit', compact('title','barang','barang_masuk'));
         $view=$view->render();
         return $view;

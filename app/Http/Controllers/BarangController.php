@@ -22,7 +22,7 @@ class BarangController extends Controller
     public function index()
     {
         $title = "Barang";
-        $barang = Barang::orderBy('id','DESC')->paginate(25)->onEachSide(1);
+        $barang = Barang::orderBy('id','ASC')->paginate(25)->onEachSide(1);
         return view('admin.barang.index',compact('title','barang'));
     }
 
@@ -36,7 +36,7 @@ class BarangController extends Controller
                                     ->orWhere('nama_barang', 'LIKE', '%'.$barang.'%')
                                     ->orWhere('satuan', 'LIKE', '%'.$barang.'%');
                             })
-                            ->orderBy('id','DESC')->paginate(25)->onEachSide(1);
+                            ->orderBy('id','ASC')->paginate(25)->onEachSide(1);
         return view('admin.barang.index',compact('title','barang'));
     }
 

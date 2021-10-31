@@ -27,8 +27,8 @@
 											</div>
 										</div>
 										<div class="form-group row">
-											<label class="col-form-label col-sm-2 text-sm-right"> {{ __('Satuan') }}</label>
-											<div class="col-sm-10">
+											<label class="col-form-label col-sm-3 text-sm-right"> {{ __('Satuan') }}  <span class="required" style="color: #dd4b39;">*</span></label>
+											<div class="col-sm-9">
 												<select class="form-control @if ($errors->has('satuan')) is-invalid @endif " name="satuan">
 													<option value="">- Pilih Satuan-</option>
 													@foreach ($satuan as $v)
