@@ -71,6 +71,11 @@
 													<form action="{{ url('/'.Request::segment(1).'/edit2/'.$v->id) }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
 														{{ csrf_field() }}
 														<input type="hidden" name="_method" value="PUT">
+														<input type="text" name="barcode" placeholder="Barcode" class="form-control"style="margin-bottom:10px" @if(Request::segment(2)=="search2") autofocus @endif>
+													</form>
+													<form action="{{ url('/'.Request::segment(1).'/edit3/'.$v->id) }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+														{{ csrf_field() }}
+														<input type="hidden" name="_method" value="PUT">
 														<input type="text" name="jumlah" placeholder="Jumlah Barang" class="form-control" onkeyup="formatRupiah(this, '.')" style="margin-bottom:10px">
 													</form>
 													<a href="{{ url('/barang_masuk/edit/'.$v->id ) }}" class="btn btn-sm btn-warning btn-block">Edit</a>

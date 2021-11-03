@@ -48,6 +48,15 @@ class BarangKeluarController extends Controller
         return view('admin.barang_keluar.index',compact('title','barang_keluar'));
     }
 
+    ## Tampilkan Data Search
+    public function search2(Request $request)
+    {
+        $title = "Barang Keluar";
+        $barang_keluar = $request->get('search');
+        $barang_keluar = BarangKeluar::where('id', $barang_keluar)->orderBy('id','ASC')->paginate(25)->onEachSide(1);
+        return view('admin.barang_keluar.index',compact('title','barang_keluar'));
+    }
+
     ## Tampilkan Form Create
     public function create()
     {
@@ -122,11 +131,22 @@ class BarangKeluarController extends Controller
     public function update2(Request $request, BarangKeluar $barang_keluar)
     {
         $barang_keluar->fill($request->all());
+        $barang_keluar->jumlah = $barang_keluar->jumlah + 1;
+        $barang_keluar->user_id = Auth::user()->id;
+        $barang_keluar->save();
+        
+        return redirect('/barang_keluar/search2?search='.$barang_keluar->id)->with('status', 'Data Berhasil Diubah');
+    }
+
+    ## Edit Data
+    public function update3(Request $request, BarangKeluar $barang_keluar)
+    {
+        $barang_keluar->fill($request->all());
         $barang_keluar->jumlah = str_replace(".", "", $request->jumlah);
         $barang_keluar->user_id = Auth::user()->id;
         $barang_keluar->save();
         
-        return redirect('/barang_keluar/')->with('status', 'Data Berhasil Diubah');
+        return redirect('/barang_keluar')->with('status', 'Data Berhasil Diubah');
     }
 
     ## Hapus Data

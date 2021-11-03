@@ -51,21 +51,25 @@ Route::get('/barang/hapus/{barang}',[BarangController::class, 'delete']);
 ## BarangMasuk
 Route::get('/barang_masuk', [BarangMasukController::class, 'index']);
 Route::get('/barang_masuk/search', [BarangMasukController::class, 'search']);
+Route::get('/barang_masuk/search2', [BarangMasukController::class, 'search2']);
 Route::get('/barang_masuk/create', [BarangMasukController::class, 'create']);
 Route::post('/barang_masuk', [BarangMasukController::class, 'store']);
 Route::get('/barang_masuk/edit/{barang_masuk}', [BarangMasukController::class, 'edit']);
 Route::put('/barang_masuk/edit/{barang_masuk}', [BarangMasukController::class, 'update']);
 Route::put('/barang_masuk/edit2/{barang_masuk}', [BarangMasukController::class, 'update2']);
+Route::put('/barang_masuk/edit3/{barang_masuk}', [BarangMasukController::class, 'update3']);
 Route::get('/barang_masuk/hapus/{barang_masuk}',[BarangMasukController::class, 'delete']);
 
 ## Barang Keluar
 Route::get('/barang_keluar', [BarangKeluarController::class, 'index']);
 Route::get('/barang_keluar/search', [BarangKeluarController::class, 'search']);
+Route::get('/barang_keluar/search2', [BarangKeluarController::class, 'search2']);
 Route::get('/barang_keluar/create', [BarangKeluarController::class, 'create']);
 Route::post('/barang_keluar', [BarangKeluarController::class, 'store']);
 Route::get('/barang_keluar/edit/{barang_keluar}', [BarangKeluarController::class, 'edit']);
 Route::put('/barang_keluar/edit/{barang_keluar}', [BarangKeluarController::class, 'update']);
 Route::put('/barang_keluar/edit2/{barang_keluar}', [BarangKeluarController::class, 'update2']);
+Route::put('/barang_keluar/edit3/{barang_keluar}', [BarangKeluarController::class, 'update3']);
 Route::get('/barang_keluar/hapus/{barang_keluar}',[BarangKeluarController::class, 'delete']);
 
 ## Satuan
