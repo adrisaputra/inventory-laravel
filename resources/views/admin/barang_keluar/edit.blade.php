@@ -49,7 +49,7 @@
 										<div class="form-group row">
 											<label class="col-form-label col-sm-3 text-sm-right">  {{ __('Jumlah') }} <span class="required" style="color: #dd4b39;">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="jumlah" class="form-control @if ($errors->has('jumlah')) is-invalid @endif " value="{{ number_format($barang_keluar->jumlah, 0, ',', '.') }}" onkeyup="formatRupiah(this, '.')">
+												<input type="text" name="jumlah" class="form-control @if ($errors->has('jumlah')) is-invalid @endif " value="{{ $barang_keluar->jumlah }}">
 												@if ($errors->has('jumlah')) <label id="validation-email-error" class="error jquery-validation-error small form-text invalid-feedback" for="validation-email">{{ $errors->first('jumlah') }}</label>@endif
 											</div>
 										</div>

@@ -84,7 +84,7 @@ class BarangKeluarController extends Controller
         $input['tanggal'] = $thn.'-'.$bln.'-'.$tgl;
         $input['waktu'] = $request->waktu;
         $input['barang_id'] = $request->barang_id;
-        $input['jumlah'] = str_replace(".", "", $request->jumlah);
+        $input['jumlah'] = $request->jumlah;
         $input['keterangan'] = $request->keterangan;
         $input['user_id'] = Auth::user()->id;
         
@@ -120,7 +120,7 @@ class BarangKeluarController extends Controller
         $thn = substr($request->tanggal,6,4);
         
         $barang_keluar->tanggal = $thn.'-'.$bln.'-'.$tgl;
-        $barang_keluar->jumlah = str_replace(".", "", $request->jumlah);
+        $barang_keluar->jumlah = $request->jumlah;
         $barang_keluar->user_id = Auth::user()->id;
         $barang_keluar->save();
         
@@ -142,7 +142,7 @@ class BarangKeluarController extends Controller
     public function update3(Request $request, BarangKeluar $barang_keluar)
     {
         $barang_keluar->fill($request->all());
-        $barang_keluar->jumlah = str_replace(".", "", $request->jumlah);
+        $barang_keluar->jumlah = $request->jumlah;
         $barang_keluar->user_id = Auth::user()->id;
         $barang_keluar->save();
         

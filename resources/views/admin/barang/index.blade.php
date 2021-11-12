@@ -57,11 +57,11 @@
 											@foreach($barang as $v)
 												@php
 													$jumlah_barang_masuk = DB::table('barang_masuk_tbl')
-																		->select(DB::raw('SUM(jumlah) as total'))
+																		->select(DB::raw('SUM(round(jumlah , 1)) as total'))
 																		->where('barang_id', $v->id)
 																		->first();
 													$jumlah_barang_keluar = DB::table('barang_keluar_tbl')
-																		->select(DB::raw('SUM(jumlah) as total'))
+																		->select(DB::raw('SUM(round(jumlah , 1)) as total'))
 																		->where('barang_id', $v->id)
 																		->first();
 												@endphp
@@ -76,7 +76,7 @@
 												<td>{{ $v->nama_barang }}</td>
 												
 												<td>{{ $v->satuan }}</td>
-												<td>{{ number_format((($v->stok + $jumlah_barang_masuk->total)-$jumlah_barang_keluar->total),0,",",".") }}</td>
+												<td>{{ ($v->stok + $jumlah_barang_masuk->total)-$jumlah_barang_keluar->total }}</td>
 												<td>
 													<a href="data:image/png;base64,{{DNS1D::getBarcodePNG($v->barcode, 'C39',1,70,array(1,1,1), true) }}" class="btn btn-sm btn-primary btn-block" download="{{ $v->nama_barang }}" >Download Barcode</a>
 													<a href="{{ url('/barang/edit/'.$v->id ) }}" class="btn btn-sm btn-warning btn-block">Edit</a>

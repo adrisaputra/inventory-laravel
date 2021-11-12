@@ -65,7 +65,7 @@
 												<td>{{ $v->barang->barcode }}</td>
 												<td>{{ $v->barang->nama_barang }}</td>
 												<td>{{ $v->barang->satuan }}</td>
-												<td>{{ number_format($v->jumlah,0,",",".") }}</td>
+												<td>{{ $v->jumlah }}</td>
 												<td>{{ $v->keterangan }}</td>
 												<td>
 													<form action="{{ url('/'.Request::segment(1).'/edit2/'.$v->id) }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
@@ -76,7 +76,7 @@
 													<form action="{{ url('/'.Request::segment(1).'/edit3/'.$v->id) }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
 														{{ csrf_field() }}
 														<input type="hidden" name="_method" value="PUT">
-														<input type="text" name="jumlah" placeholder="Jumlah Barang" class="form-control" onkeyup="formatRupiah(this, '.')" style="margin-bottom:10px">
+														<input type="text" name="jumlah" placeholder="Jumlah Barang" class="form-control" style="margin-bottom:10px">
 													</form>
 													<a href="{{ url('/barang_keluar/edit/'.$v->id ) }}" class="btn btn-sm btn-warning btn-block">Edit</a>
 													<a href="{{ url('/barang_keluar/hapus/'.$v->id ) }}" class="btn btn-sm btn-danger btn-block" onclick="return confirm('Anda Yakin ?');">Hapus</a>

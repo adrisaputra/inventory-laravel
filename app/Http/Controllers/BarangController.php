@@ -54,6 +54,7 @@ class BarangController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'barcode' => 'alpha_num',
             'nama_barang' => 'required',
             'satuan' => 'required',
             'harga' => 'required',
@@ -64,7 +65,7 @@ class BarangController extends Controller
         $input['nama_barang'] = $request->nama_barang;
         $input['satuan'] = $request->satuan;
         $input['harga'] = str_replace(".", "", $request->harga);
-        $input['stok'] = str_replace(".", "", $request->stok);
+        $input['stok'] = $request->stok;
         $input['user_id'] = Auth::user()->id;
         
         Barang::create($input);
@@ -86,6 +87,7 @@ class BarangController extends Controller
     public function update(Request $request, Barang $barang)
     {
         $this->validate($request, [
+            'barcode' => 'alpha_num',
             'nama_barang' => 'required',
             'satuan' => 'required',
             'harga' => 'required',
@@ -95,7 +97,7 @@ class BarangController extends Controller
         $barang->fill($request->all());
         
         $barang->harga = str_replace(".", "", $request->harga);
-        $barang->stok = str_replace(".", "", $request->stok);
+        $barang->stok = $request->stok;
         $barang->user_id = Auth::user()->id;
         $barang->save();
         

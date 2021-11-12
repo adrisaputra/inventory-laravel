@@ -48,7 +48,7 @@
 										<div class="form-group row">
 											<label class="col-form-label col-sm-3 text-sm-right"> Stok Awal <span class="required" style="color: #dd4b39;">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="stok" class="form-control @if ($errors->has('stok')) is-invalid @endif " value="{{ old('stok') }}" onkeyup="formatRupiah(this, '.')">
+												<input type="text" name="stok" class="form-control @if ($errors->has('stok')) is-invalid @endif " value="{{ old('stok') }}" >
 												@if ($errors->has('stok')) <label id="validation-email-error" class="error jquery-validation-error small form-text invalid-feedback" for="validation-email">{{ $errors->first('stok') }}</label>@endif
 											</div>
 										</div>
