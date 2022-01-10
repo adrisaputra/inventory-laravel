@@ -80,15 +80,16 @@ class ReportController extends Controller
             $rows = 4;
             $no = 1;
         
-            $barang_masuk = BarangMasuk::whereBetween('tanggal', array($tanggal_awal, $tanggal_akhir))->orderBy('id','ASC')->get();
+            $barang_masuk = BarangMasuk::leftJoin('barang_tbl', 'barang_tbl.id', '=', 'barang_masuk_tbl.barang_id')
+                            ->whereBetween('tanggal', array($tanggal_awal, $tanggal_akhir))->orderBy('barang_masuk_tbl.id','ASC')->get();
 
             foreach($barang_masuk as $v){
                 $sheet->setCellValue('A' . $rows, $no++);
                 $sheet->setCellValue('B' . $rows, date('d-m-Y', strtotime($v->tanggal)));
                 $sheet->setCellValue('C' . $rows, $v->waktu);
-                $sheet->setCellValue('D' . $rows, $v->barang->barcode);
-                $sheet->setCellValue('E' . $rows, $v->barang->nama_barang);
-                $sheet->setCellValue('F' . $rows, $v->barang->satuan);
+                $sheet->setCellValue('D' . $rows, $v->barcode);
+                $sheet->setCellValue('E' . $rows, $v->nama_barang);
+                $sheet->setCellValue('F' . $rows, $v->satuan);
                 $sheet->setCellValue('G' . $rows, $v->jumlah);
                 $sheet->getStyle('G' . $rows)->getNumberFormat()->setFormatCode('#,##0');
                 $sheet->setCellValue('H' . $rows, $v->keterangan);
@@ -158,15 +159,16 @@ class ReportController extends Controller
             $rows = 4;
             $no = 1;
         
-            $barang_keluar = BarangKeluar::whereBetween('tanggal', array($tanggal_awal, $tanggal_akhir))->orderBy('id','ASC')->get();
+            $barang_keluar = BarangKeluar::leftJoin('barang_tbl', 'barang_tbl.id', '=', 'barang_keluar_tbl.barang_id')
+                            ->whereBetween('tanggal', array($tanggal_awal, $tanggal_akhir))->orderBy('barang_keluar_tbl.id','ASC')->get();
 
             foreach($barang_keluar as $v){
                 $sheet->setCellValue('A' . $rows, $no++);
                 $sheet->setCellValue('B' . $rows, date('d-m-Y', strtotime($v->tanggal)));
                 $sheet->setCellValue('C' . $rows, $v->waktu);
-                $sheet->setCellValue('D' . $rows, $v->barang->barcode);
-                $sheet->setCellValue('E' . $rows, $v->barang->nama_barang);
-                $sheet->setCellValue('F' . $rows, $v->barang->satuan);
+                $sheet->setCellValue('D' . $rows, $v->barcode);
+                $sheet->setCellValue('E' . $rows, $v->nama_barang);
+                $sheet->setCellValue('F' . $rows, $v->satuan);
                 $sheet->setCellValue('G' . $rows, $v->jumlah);
                 $sheet->getStyle('G' . $rows)->getNumberFormat()->setFormatCode('#,##0');
                 $sheet->setCellValue('H' . $rows, $v->keterangan);
